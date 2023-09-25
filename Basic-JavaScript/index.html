@@ -1,0 +1,125 @@
+<html>
+<head>
+    
+    <script>
+        // Basic Javascript Functions including Classes / Objects / Prototypes and InstanceOf
+        // I know there is a Math.PI function, just a const example
+        const pi = 3.14; // Constant set to 'a' - cannot be changed after assigned
+        let y = 1; // A variable that can be reassigned to any type - only accessible locally
+        var z = 1; // A variable that is not block scoped.
+        window.addEventListener('load', myFunction); // runs a function on load
+
+        function myFunction(){
+            hello();  // Hoisting - it will find the function even though it's after it - JS pulls the functions up to the top of the file.
+            // The function can be invoked before the declaration
+        }
+
+        function changeVar(w) {
+            y = z;
+            z = document.getElementById("no1").value;
+            changeZ();
+            return "Z was changed from " + y + " to " + z;     
+        }
+
+        function circleSize(){
+            var radius = document.getElementById("radius").value;
+            var ans = parseFloat(pi * radius * radius).toFixed(2);
+            return "Circle Size is: " + ans + "cm&sup2"; 
+        }
+
+        // Regular function
+        function isEven(num) {
+            return num % 2 === 0;
+        }
+
+        function changeZ() {
+            document.getElementById('zvar').innerHTML = "Change variable Z from " +  z + " to:";
+        }
+
+        function hello(){
+            changeZ();
+            document.getElementById('hello').innerHTML = "Hello " + p.name;
+            p.sayHello();
+            document.getElementById('hello3').innerHTML = c.output();
+            document.getElementById('hello4').innerHTML = "Tom is a instance of Person class? " + (p instanceof Person) + 
+            "<br> Is Tom an instance of Car? " + (p instanceof Car) + 
+            "<br> Is Ford a prototype of Car? " + (Object.getPrototypeOf(c) == Car.prototype) + 
+            "<br> Using isEven() function: 4 is even? " + isEven(4) +
+            "<br> Using regular function sum1(3,4): " + sum1(3,4) +
+            "<br> Using sum2 = function sum2(3,4): " + sum2(3,4) +
+            "<br> Using arrow function sum3(3,4): " + sum1(3,4);
+        }
+
+        function sum1(a, b) {
+            return a + b;
+        }
+        const sum2 = function(a, b) {
+        return a + b;
+        }
+        const sum3 = (a, b) => a + b;
+
+        // Function creates a new class using a prototype function.
+        function Person(){
+            this.name = "Tom"; // Class variable that can be accessed after object initalized
+        } 
+
+        // Prototype function but fairly redundant now
+        Person.prototype.sayHello = function(){
+            document.getElementById('hello2').innerHTML = "Hello from Tom";
+        }
+
+        const p = new Person(); // Initalize a person (p) as an object
+        
+        // Create a car class with constructor and get and output methods.
+        class Car {
+            constructor(m, mo){
+                this.make = m;
+                this.model = mo;
+            }
+
+            getMake(){
+                return this.make;
+            }
+
+            getModel() {
+                return this.model;
+            }
+
+            output(){
+                return "This car is a " + this.make + " " + this.model;
+            }
+        }
+
+        // Create an object from the Car class (ford fiesta)
+        const c = new Car("Ford","Fiesta"); // Initialize a car
+
+    </script>
+    <link rel="stylesheet" href="src/styles.css">
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            <h1 id="title">Learning Basic JavaScript</h1>
+        </div>
+        <div id="content">
+            <div id="section">
+                <p id="hello"></p>
+                <p id="hello2"></p>
+                <p id="hello3"></p>
+                <p id="hello4"></p><br>
+            </div>
+            <div id="section2">
+                <div id="zvar"></div>
+                <input type="text" id="no1"/>
+                <button type="button" onclick="document.getElementById('output').innerHTML = changeVar();">Change Number</button>
+                <p id="output"></p>
+                Enter radius (cm):<br><input type="text" id="radius"/>
+                <button type="button" onclick="document.getElementById('circle').innerHTML = circleSize();">Calculate Circle Area</button>
+                <p id="circle"></p>
+        </div>
+    </div>
+    <div id="footer">
+        <a href="https://www.github.com/tdbcode">TDBCode</a>
+    </div>
+</body>
+</html>
